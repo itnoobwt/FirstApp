@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="tab_list">
+        <item>阅读</item >
+        <item>消息</item>
+        <item>发现</item>
+        <item>我的</item>
+    </array>
+</resources>
