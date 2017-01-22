@@ -31,4 +31,6 @@ dependencies {
     compile 'com.jakewharton:butterknife-compiler:8.4.0'
     compile 'com.facebook.fresco:fresco:1.0.1'
     compile project(':library')
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'de.greenrobot:eventbus:3.0.0-beta1'
 }

@@ -104,29 +104,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         tablayout.getTabAt(0).setIcon(R.mipmap.aa);
         tablayout.getTabAt(1).setIcon(R.mipmap.bb);
         tablayout.getTabAt(2).setIcon(R.mipmap.cc);
-//        tablayout.getTabAt(3).setIcon(R.mipmap.dd);
         viewPage.setCurrentItem(0);
-//        tablayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
-//        {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab)
-//            {
-//                Toast.makeText(MainActivity.this, tab.getText(), Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab)
-//            {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab)
-//            {
-//
-//            }
-//        });
-
     }
 
 

@@ -1,5 +1,6 @@
 package firstapp.system.com.myapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import firstapp.system.com.myapplication.BaseFragment;
+import firstapp.system.com.myapplication.DemoActivity;
 import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
@@ -75,6 +77,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
     public void onItemClick(View view, int position)
     {
         Toast.makeText(getActivity(), list.get(position), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), DemoActivity.class));
     }
 
     @Override

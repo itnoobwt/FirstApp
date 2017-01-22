@@ -8,6 +8,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
+import de.greenrobot.event.EventBus;
 import firstapp.system.com.myapplication.R;
 
 /**
@@ -22,6 +23,7 @@ public class BaseActivity extends AppCompatActivity
     {
         super.setContentView(layoutResID);
         unbinder = ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -29,9 +31,13 @@ public class BaseActivity extends AppCompatActivity
     {
         super.onDestroy();
         unbinder.unbind(); //释放资源
+        EventBus.getDefault().unregister(this);
     }
 
-    public void showDialog(){
+    /**
+     * 消息框
+     */
+    protected void showDialog(){
         final NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(this);
         dialogBuilder
                 .withTitle("Modal Dialog")  //设置标题

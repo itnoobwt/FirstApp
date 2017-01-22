@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import butterknife.BindView;
 import firstapp.system.com.myapplication.activity.BaseActivity;
 import firstapp.system.com.myapplication.adapter.ViewPageAdapter;
@@ -38,5 +39,11 @@ public class DemoActivity extends BaseFragmentActivity
 //        tablayout.getTabAt(1).setIcon(R.mipmap.bb);
 //        tablayout.getTabAt(2).setIcon(R.mipmap.cc);
 //        tablayout.getTabAt(3).setIcon(R.mipmap.dd);
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
     }
 }
