@@ -91,6 +91,10 @@ public class OKhttpClientManager
                 .build();
     }
 
+    public OkHttpClient getOkHttpClient(){
+        return okHttpClient;
+    }
+
     public SSLSocketFactory setCertificates(InputStream inputStream){
         try
         {

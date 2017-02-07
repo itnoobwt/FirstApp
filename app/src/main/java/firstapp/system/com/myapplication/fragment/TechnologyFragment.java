@@ -21,6 +21,7 @@ import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
 import firstapp.system.com.myapplication.utils.DialogUtils;
+import firstapp.system.com.myapplication.utils.ProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +52,8 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         return view;
     }
     public void InitData(){
-        list.add("Java");
+        list.clear();
+        list.add("Retrofit结合OKHTTP使用");
         list.add("C++");
         list.add("PHP");
         list.add("C语言");
@@ -71,13 +73,35 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.addItemDecoration(new DividerGridItemDecoration(getActivity(), OrientationHelper.VERTICAL));
         rv.setAdapter(adapter);
+        tabTitle.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener()
+        {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab)
+            {
+                Toast.makeText(getActivity(), tab.getText(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab)
+            {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab)
+            {
+
+            }
+        });
     }
 
     @Override
     public void onItemClick(View view, int position)
     {
         Toast.makeText(getActivity(), list.get(position), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(getActivity(), DemoActivity.class));
+        if(list.get(position).equals("Retrofit结合OKHTTP使用")){
+            startActivity(new Intent(getActivity(), ProductActivity.class));
+        }
     }
 
     @Override
