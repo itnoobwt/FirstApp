@@ -1,4 +1,4 @@
-package firstapp.system.com.myapplication.utils;
+package firstapp.system.com.myapplication;
 
 import android.os.Bundle;
 import android.widget.Button;

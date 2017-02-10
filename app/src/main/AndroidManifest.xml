@@ -27,7 +27,7 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DemoActivity" />
-        <activity android:name=".utils.ProductActivity"></activity>
+        <activity android:name=".ProductActivity"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,11 @@
 package firstapp.system.com.myapplication.okhttp;
 
 import android.content.Context;
+import firstapp.system.com.myapplication.BuildConfig;
 import firstapp.system.com.myapplication.utils.FileUtils;
 import firstapp.system.com.myapplication.utils.LogUtils;
 import okhttp3.*;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -71,13 +73,23 @@ public class OKhttpClientManager
             e.printStackTrace();
         }
         SSLSocketFactory socketFactory  = setCertificates(is);
-
+        //okhttp3 日志拦截器有四个级别(NONE、BASIC、HEADERS、BODY)
+        //Basic 日志会输出请求类型(request type),请求地址(url),请求大小(size of request body),响应码(response status)响应大小(size of response  body)
+        //headers 输出请求和响应的头信息(headers)，请求类型(request type)，请求地址(request url)，响应码(response status)。
+        //Body 输出请求和响应的头信息(headers)和内容(body)。
+        //BuildConfig.DEBUG 开发环境返回true，对于您的生产环境返回false
+        if(BuildConfig.DEBUG)
+        {
+            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        }
         okHttpClient = new OkHttpClient()
                 .newBuilder()
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(20,TimeUnit.SECONDS)
                 .writeTimeout(20,TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
+                .addInterceptor(loggingInterceptor)
                 .socketFactory(socketFactory)
                 .hostnameVerifier(new HostnameVerifier()
                 {
@@ -90,7 +102,7 @@ public class OKhttpClientManager
                 .cache(cache)
                 .build();
     }
-
+    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
     public OkHttpClient getOkHttpClient(){
         return okHttpClient;
     }

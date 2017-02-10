@@ -3,13 +3,16 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "23.0.3"
+
     defaultConfig {
         applicationId "firstapp.system.com.myapplication"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -24,20 +27,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.+'
-    compile 'com.android.support:design:25.+'
+    compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.jakewharton:butterknife:8.4.0'
-    compile 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.facebook.fresco:fresco:1.0.1'
-    compile project(':library')
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
-    compile 'de.greenrobot:eventbus:3.0.0-beta1'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    //日志输出拦截器
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
-    //XML转换器
-    compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'
+    compile files('libs/bcprov-jdk15on-155.jar')
 }

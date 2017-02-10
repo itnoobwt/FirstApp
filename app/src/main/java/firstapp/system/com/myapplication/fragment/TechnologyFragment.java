@@ -11,17 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import firstapp.system.com.myapplication.BaseFragment;
-import firstapp.system.com.myapplication.DemoActivity;
 import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
-import firstapp.system.com.myapplication.utils.DialogUtils;
-import firstapp.system.com.myapplication.utils.ProductActivity;
+import firstapp.system.com.myapplication.ProductActivity;
 
 import java.util.ArrayList;
 import java.util.List;
