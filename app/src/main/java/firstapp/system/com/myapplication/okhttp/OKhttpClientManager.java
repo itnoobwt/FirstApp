@@ -1,6 +1,7 @@
 package firstapp.system.com.myapplication.okhttp;
 
 import android.content.Context;
+import firstapp.system.com.myapplication.MyApplication;
 import firstapp.system.com.myapplication.utils.FileUtils;
 import firstapp.system.com.myapplication.utils.LogUtils;
 import okhttp3.*;
@@ -15,6 +16,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -30,14 +33,13 @@ public class OKhttpClientManager
     private OkHttpClient okHttpClient;
     private String result;
     private String ERROR = "error";
-    private Context context;
-    private InputStream is;
-
-    public static OKhttpClientManager getInstance(Context context){
+    public static InputStream is;
+    private String TAG = "OKhttpClientManager";
+    public static OKhttpClientManager getInstance(){
         if(okhttpClient == null){
             synchronized (OKhttpClientManager.class){
                 if(okhttpClient == null){
-                    okhttpClient = new OKhttpClientManager(context);
+                    okhttpClient = new OKhttpClientManager();
                 }
             }
         }
@@ -60,16 +62,8 @@ public class OKhttpClientManager
     /**
      * 设置网络请求参数
      */
-    public OKhttpClientManager(Context context){
+    public OKhttpClientManager(){
         Cache cache = new Cache(FileUtils.getInstance().getCacheDir(),CACHESIZE);
-        try
-        {
-            is = context.getAssets().open("selfcert.cer");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
         SSLSocketFactory socketFactory  = setCertificates(is);
         //okhttp3 日志拦截器有四个级别(NONE、BASIC、HEADERS、BODY)
         //Basic 日志会输出请求类型(request type),请求地址(url),请求大小(size of request body),响应码(response status)响应大小(size of response  body)
@@ -88,14 +82,14 @@ public class OKhttpClientManager
                 .writeTimeout(20,TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
                 .socketFactory(socketFactory)
-                .hostnameVerifier(new HostnameVerifier()
-                {
-                    @Override
-                    public boolean verify(String hostname, SSLSession session)
-                    {
-                        return true;
-                    }
-                })
+//                .hostnameVerifier(new  HostnameVerifier()
+//                {
+//                    @Override
+//                    public boolean verify(String hostname, SSLSession session)
+//                    {
+//                        return true;
+//                    }
+//                })
                 .cache(cache)
                 .build();
     }
@@ -107,15 +101,14 @@ public class OKhttpClientManager
         try
         {
             CertificateFactory factory = CertificateFactory.getInstance("X.509");
-//            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            KeyStore keyStore = KeyStore.getInstance("BKS");
+            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
             keyStore.load(null,null);
-            int index = 0;
-            String certificateAlias = Integer.toBinaryString(index++);
+//            int index = 0;
+//            String certificateAlias = Integer.toBinaryString(index++);
             Certificate certificate = factory.generateCertificate(inputStream);
-            LogUtils.e("ca","ca = "+((X509Certificate)certificate).getPublicKey());
-            LogUtils.e("ca","key = "+((X509Certificate)certificate).getSubjectDN());
-            keyStore.setCertificateEntry(certificateAlias,certificate);
+//            LogUtils.e("ca","ca = "+((X509Certificate)certificate).getPublicKey());
+//            LogUtils.e("ca","key = "+((X509Certificate)certificate).getSubjectDN());
+            keyStore.setCertificateEntry("server",certificate);
             try
             {
                 inputStream.close();
@@ -211,12 +204,13 @@ public class OKhttpClientManager
         try
         {
             Response response = call.execute();
+            Headers headers = response.headers();
             return result = response.toString();
         }
         catch (IOException e)
         {
             e.printStackTrace();
-            LogUtils.e("OKHTTP",e.getMessage()+"");
+            LogUtils.e(TAG,e.getMessage()+"");
         }
         return ERROR;
     }
@@ -266,23 +260,25 @@ public class OKhttpClientManager
     public String getHttp(){
         try
         {
-            HttpURLConnection connection = (HttpURLConnection)new URL("https://192.168.1.144:8443/power/").openConnection();
+            HttpURLConnection connection = (HttpURLConnection)new URL("https://192.168.1.137:8443/MyHttps/ProductServlet").openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream())) ;
             StringBuffer buffer = new StringBuffer();
             String line;
             while ((line=reader.readLine())!=null){
                 buffer.append(line);
             }
-            LogUtils.e("success",buffer.toString());
+            LogUtils.e(TAG,buffer.toString());
             return buffer.toString();
         }
         catch (MalformedURLException e)
         {
             e.printStackTrace();
+            LogUtils.e(TAG,e.getMessage()+"");
         }
         catch (IOException e)
         {
             e.printStackTrace();
+            LogUtils.e(TAG,e.getMessage()+"");
         }
         return "";
     }
@@ -305,7 +301,7 @@ public class OKhttpClientManager
                     return true;
                 }
             });
-            URL url = new URL("https://192.168.1.144:8443/power/");
+            URL url = new URL("https://192.168.1.137:8443/MyHttps/ProductServlet");
             HttpsURLConnection https = (HttpsURLConnection)url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(https.getInputStream()));
             StringBuffer buffer = new StringBuffer();
@@ -313,7 +309,7 @@ public class OKhttpClientManager
             while ((line=reader.readLine())!=null){
                 buffer.append(line);
             }
-            LogUtils.e("success",buffer.toString());
+            LogUtils.e(TAG,buffer.toString());
             return buffer.toString();
         }
         catch (MalformedURLException e)

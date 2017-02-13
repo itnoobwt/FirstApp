@@ -15,11 +15,11 @@ public class RetrofitUtils
     private Retrofit retrofit;
     public RetrofitUtils(){
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://192.168.1.144:8443/MyHttps/")
+                    .baseUrl("https://192.168.1.137:8443/MyHttps/")
                 .addConverterFactory(FastJsonConverterFactory.create())
 //                .addConverterFactory(SimpleXmlConverterFactory.create()) //XML转换器
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .client(OKhttpClientManager.getInstance(MyApplication.context).getOkHttpClient())
+                .client(OKhttpClientManager.getInstance().getOkHttpClient())
                 .build();
     }
     public static RetrofitUtils getInstance(){

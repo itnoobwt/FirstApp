@@ -8,7 +8,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.activity.BaseActivity;
+import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
 import firstapp.system.com.myapplication.service.ProductServiceImp;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ProductActivity extends BaseActivity
 {
@@ -28,6 +32,25 @@ public class ProductActivity extends BaseActivity
     @OnClick(R.id.btn_get)
     public void getNetWork()
     {
-        ProductServiceImp.getProduct(textContent);
+//        ProductServiceImp.getProduct(textContent);
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    InputStream inputStream = getAssets().open("server.cer");
+                    OKhttpClientManager.getInstance()
+                            .OKhttpRequest("https://192.168.1.137:8443/MyHttps/ProductServlet");
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+
     }
 }
