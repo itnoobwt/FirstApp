@@ -1,11 +1,9 @@
 package firstapp.system.com.myapplication.okhttp;
 
 import android.content.Context;
-import firstapp.system.com.myapplication.BuildConfig;
 import firstapp.system.com.myapplication.utils.FileUtils;
 import firstapp.system.com.myapplication.utils.LogUtils;
 import okhttp3.*;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.net.ssl.*;
 import java.io.*;
@@ -78,18 +76,17 @@ public class OKhttpClientManager
         //headers 输出请求和响应的头信息(headers)，请求类型(request type)，请求地址(request url)，响应码(response status)。
         //Body 输出请求和响应的头信息(headers)和内容(body)。
         //BuildConfig.DEBUG 开发环境返回true，对于您的生产环境返回false
-        if(BuildConfig.DEBUG)
-        {
-            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        }
+//        if(BuildConfig.DEBUG)
+//        {
+//            HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+//            loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        }
         okHttpClient = new OkHttpClient()
                 .newBuilder()
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .readTimeout(20,TimeUnit.SECONDS)
                 .writeTimeout(20,TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
-                .addInterceptor(loggingInterceptor)
                 .socketFactory(socketFactory)
                 .hostnameVerifier(new HostnameVerifier()
                 {
@@ -102,7 +99,6 @@ public class OKhttpClientManager
                 .cache(cache)
                 .build();
     }
-    HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
     public OkHttpClient getOkHttpClient(){
         return okHttpClient;
     }
@@ -111,8 +107,9 @@ public class OKhttpClientManager
         try
         {
             CertificateFactory factory = CertificateFactory.getInstance("X.509");
-            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
-            keyStore.load(null);
+//            KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+            KeyStore keyStore = KeyStore.getInstance("BKS");
+            keyStore.load(null,null);
             int index = 0;
             String certificateAlias = Integer.toBinaryString(index++);
             Certificate certificate = factory.generateCertificate(inputStream);
@@ -128,10 +125,12 @@ public class OKhttpClientManager
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory
                     .getDefaultAlgorithm());
             trustManagerFactory.init(keyStore);
+
+            TrustManager[] wrappedTrustManagers =getWrappedTrustManagers(trustManagerFactory.getTrustManagers());
             SSLContext sslContext = SSLContext.getInstance("TLS");
             try
             {
-                sslContext.init(null,trustManagerFactory.getTrustManagers(),new SecureRandom());
+                sslContext.init(null,wrappedTrustManagers,new SecureRandom());
             }
             catch (KeyManagementException e)
             {
@@ -156,6 +155,53 @@ public class OKhttpClientManager
             e.printStackTrace();
         }
         return null;
+    }
+
+    public TrustManager[] getWrappedTrustManagers(TrustManager[] trustManagers){
+        final X509TrustManager originalTrustManager  = (X509TrustManager)trustManagers[0];
+        return new TrustManager[]{
+                new X509TrustManager()
+                {
+                    public X509Certificate[] getAcceptedIssuers()
+                    {
+                        return originalTrustManager.getAcceptedIssuers();
+                    }
+
+                    public void checkClientTrusted (X509Certificate[]certs, String authType){
+
+                        try
+                        {
+
+                            originalTrustManager.checkClientTrusted(certs, authType);
+
+                        }
+                        catch (CertificateException e)
+                        {
+
+                            e.printStackTrace();
+
+                        }
+
+                    }
+                    public void checkServerTrusted (X509Certificate[]certs, String authType){
+
+                        try
+                        {
+
+                            originalTrustManager.checkServerTrusted(certs, authType);
+
+                        }
+                        catch (CertificateException e)
+                        {
+
+                            e.printStackTrace();
+
+                        }
+                    }
+
+                }
+        };
+
     }
 
 

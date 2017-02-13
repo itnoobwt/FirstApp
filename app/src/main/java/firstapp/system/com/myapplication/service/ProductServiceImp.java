@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.widget.TextView;
 import firstapp.system.com.myapplication.entity.Product;
 import firstapp.system.com.myapplication.okhttp.RetrofitUtils;
+import firstapp.system.com.myapplication.utils.LogUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -44,6 +45,7 @@ public class ProductServiceImp
             public void onFailure(Call<Product> call, Throwable t)
             {
                 textView.setText(t.getMessage());
+                LogUtils.e("OKHTTP",t.getMessage()+"");
             }
         });
         return null;

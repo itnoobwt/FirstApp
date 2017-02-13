@@ -4,7 +4,6 @@ import firstapp.system.com.myapplication.MyApplication;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.fastjson.FastJsonConverterFactory;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 /**
  * Created by user on 2017/2/6.
@@ -18,7 +17,7 @@ public class RetrofitUtils
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://192.168.1.144:8443/MyHttps/")
                 .addConverterFactory(FastJsonConverterFactory.create())
-                .addConverterFactory(SimpleXmlConverterFactory.create()) //XML转换器
+//                .addConverterFactory(SimpleXmlConverterFactory.create()) //XML转换器
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(OKhttpClientManager.getInstance(MyApplication.context).getOkHttpClient())
                 .build();
