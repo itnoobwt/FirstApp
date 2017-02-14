@@ -24,7 +24,7 @@ public class MyApplication extends Application
         context = getApplicationContext();
         try
         {
-            OKhttpClientManager.is = (getAssets().open("server.cer"));
+            OKhttpClientManager.is = (getAssets().open("wt_server.cer"));
         }
         catch (IOException e)
         {

@@ -27,6 +27,7 @@ import java.util.Map;
 
 public class ProductServiceImp
 {
+    public static String TAG = "ProductServiceImp";
     private static Retrofit retrofit;
     public static Product getProduct(final TextView textView){
         retrofit = RetrofitUtils.getInstance().getRetrofit();
@@ -45,7 +46,7 @@ public class ProductServiceImp
             public void onFailure(Call<Product> call, Throwable t)
             {
                 textView.setText(t.getMessage());
-                LogUtils.e("OKHTTP",t.getMessage()+"");
+                LogUtils.e(TAG,t.getMessage()+"");
             }
         });
         return null;

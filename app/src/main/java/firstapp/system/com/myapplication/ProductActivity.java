@@ -32,25 +32,6 @@ public class ProductActivity extends BaseActivity
     @OnClick(R.id.btn_get)
     public void getNetWork()
     {
-//        ProductServiceImp.getProduct(textContent);
-        new Thread(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                try
-                {
-                    InputStream inputStream = getAssets().open("server.cer");
-                    OKhttpClientManager.getInstance()
-                            .OKhttpRequest("https://192.168.1.137:8443/MyHttps/ProductServlet");
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
-
+        ProductServiceImp.getProduct(textContent);
     }
 }
