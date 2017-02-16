@@ -5,7 +5,9 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.adapter.rxjava.Result;
 import retrofit2.http.*;
+import rx.observers.Observers;
 
 import java.util.Map;
 
@@ -17,6 +19,7 @@ public interface ProductService
 {
     @GET("ProductServlet")
     Call<Product> getProduct();
+
     /**
      * 单个参数
      * @param id

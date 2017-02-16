@@ -11,13 +11,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import firstapp.system.com.myapplication.BaseFragment;
+import firstapp.system.com.myapplication.ProductActivity;
 import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
-import firstapp.system.com.myapplication.ProductActivity;
+import firstapp.system.com.refreshlibrary.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +42,19 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
     private View view;
     public MainAdapter adapter;
     public List<String> list = new ArrayList<String>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        super.onCreateView(inflater,container,savedInstanceState);
+        super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(R.layout.fragment_technology, container, false);
         bind(view);
         InitData();
         return view;
     }
-    public void InitData(){
+
+    public void InitData()
+    {
         list.clear();
         list.add("Retrofit结合OKHTTP使用");
         list.add("C++");
@@ -61,7 +68,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         tabTitle.addTab(tabTitle.newTab().setText("Ruby"));
         tabTitle.addTab(tabTitle.newTab().setText("Swift"));
         tabTitle.addTab(tabTitle.newTab().setText("PL/SQL"));
-        adapter = new MainAdapter(getActivity(),list);
+        adapter = new MainAdapter(getActivity(), list);
         adapter.setOnItemClickLitener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(OrientationHelper.VERTICAL);
@@ -95,7 +102,8 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
     public void onItemClick(View view, int position)
     {
         Toast.makeText(getActivity(), list.get(position), Toast.LENGTH_SHORT).show();
-        if(list.get(position).equals("Retrofit结合OKHTTP使用")){
+        if (list.get(position).equals("Retrofit结合OKHTTP使用"))
+        {
             startActivity(new Intent(getActivity(), ProductActivity.class));
         }
     }

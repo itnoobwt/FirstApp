@@ -3,7 +3,9 @@ package firstapp.system.com.myapplication;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.database.ContentObserver;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -15,8 +17,9 @@ import java.security.cert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
 {
+    public ContentObserver observer;
     public static final String APP_PRIVATE_HEADER_TEXT="MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALUm1bBSCBWG1BzXnOMSQ8Mi24yDD9twjF3P8IAA+X+zhgsg9joJM0ETdSHSCV2ZWkyPD/uK3/G2+cG8ch7sRg4+7tYTlAc1W3t4Z4A1CxnjTPAGheZj71soFpOeJdHsaahaoibShLVjRSKmlm1Iwb9RubHRz2wFG+TsU9DUp7/lAgMBAAECgYB6ewpqT9yFaYcLBUFfSl8klfHpvEfBcASH/Ws3sPEAxcnwxlWVAdl0u4or1s5cSa6DKwt8YPZvgO63bgmfHNNz9QOE62V6ZDmT0VIJh2Qe1ZH7qKS9Uyq/qL3KF5szPbIMZ2/8Ska9Covf5ByWZ6XLkWvl4fQJJarx3+RowXuXoQJBAN398JRz/Ribkr5q6Lhix90HBRn5uImUwtIArdmytvoTH9SUzcNccr3xWfbIGz//hKkKtRNYJljH9M+QzSUnPJ0CQQDQ5zm/hGSrC74G1/PjKUT8oEG4IJ3dW5EQxyRGpulfL/UWtvMBs6AcLekwrykE/CVSadwNBV2L/1BjEgh/q1npAkEA0liz5Mb/FJkddCbzOvwGq63iLJnOPTdjXv/bu8M21EDY0WLqkeoAo3CVMVytTXf9qPuHVrwZIdjeZOutJz5FlQJAUcRvwhrcHGc4Ng2JFL0ul4NStfNuVxpkKaEI/e6PIgbvc7igXWYloWIHCFtHPwBCy4NL8nzLJOUGXgDM+svjIQJBANDS6EmRU+luejpYi6hxT1hOw6K0ZHP04camesACBF+tantivox6MFtlKVnTd4ZPypZyyfYB0Jvam4BAIUqCHoM=";
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,8 +27,38 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getAPPCerts();
+
+
     }
 
+    @Override
+    public void InitData()
+    {
+        observer = new ContentObserver(handler)
+        {
+            @Override
+            public void onChange(boolean selfChange)
+            {
+                super.onChange(selfChange);
+                handler.sendEmptyMessage(1);
+            }
+        };
+        registerObserver(observer);
+    }
+
+    @Override
+    public void InitView()
+    {
+
+    }
+
+    @Override
+    public void onHander(Message message)
+    {
+        switch (message.what){
+
+        }
+    }
 
 
     public void getAPPCerts(){
