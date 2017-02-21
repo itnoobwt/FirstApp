@@ -64,7 +64,11 @@ public class FileUtils
      * @return
      */
     public File getImageDir(){
-        return new File(mBaseDir,image);
+        File file = new File(mBaseDir,image);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        return file;
     }
 
     /**

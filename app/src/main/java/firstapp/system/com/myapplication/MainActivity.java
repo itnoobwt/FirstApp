@@ -1,7 +1,12 @@
 package firstapp.system.com.myapplication;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -20,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import butterknife.BindView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.gitonway.lee.niftymodaldialogeffects.lib.Effectstype;
 import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import firstapp.system.com.myapplication.activity.BaseActivity;
 import firstapp.system.com.myapplication.adapter.ViewPageAdapter;
@@ -42,6 +48,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private ViewPageAdapter adapter;
     private List<Fragment> list = new ArrayList<Fragment>();
     private long exitTime = 0;
+    private SimpleDraweeView simpleDraweeView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -92,7 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         View view = navigationView.getHeaderView(0);
-        SimpleDraweeView simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.imageView);
+        simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.imageView);
         simpleDraweeView.setImageURI(Uri.parse("http://avatar.csdn.net/A/E/5/1_csdnwt.jpg"));
 
         adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this);
@@ -156,11 +163,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         if (id == R.id.nav_camera)
         {
-            // Handle the camera action
+            requestPermission();
+            return true;
         }
         else if (id == R.id.nav_gallery)
         {
-
+            photo();
+            return true;
         }
         else if (id == R.id.nav_slideshow)
         {
@@ -185,9 +194,78 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
+    public void requestPermission()
+    {
+        super.requestPermission();
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 1:
+                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    final NiftyDialogBuilder dialogBuilder=NiftyDialogBuilder.getInstance(this);
+                    dialogBuilder
+                            .withTitle("权限访问")  //设置标题
+                            .withTitleColor("#FFFFFF")         //设置背景
+                            .withDividerColor("#11000000")                              //def
+                            .withMessage("系统正在申请相机权限yes/no?")     //设置内容
+                            .withMessageColor("#FFFFFFFF")              //设置内容背景
+                            .withDialogColor("#FFE74C3C")                               //def  | withDialogColor(int resid)                               //def
+                            .withIcon(getDrawable(R.mipmap.icon))
+                            .isCancelableOnTouchOutside(true)                           //def    | isCancelable(true)
+                            .withDuration(700)                                          //def
+                            .withEffect(Effectstype.Shake)      //启动dialog模式
+                            .withButton1Text("OK")
+                            .withButton2Text("Cancel")
+                            //                .setCustomView(R.layout.custom_view,this)           //添加布局
+                            .setButton1Click(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    camera();
+                                    dialogBuilder.dismiss();
+                                }
+                            })
+                            .setButton2Click(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialogBuilder.dismiss();
+                                }
+                            })
+                            .show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_CANCELED){
+            return;
+        }
+        switch (requestCode){
+            case CAMERA_NUM:
+                cropIma(uri);
+                break;
+            case PHOTO_NUM:
+//                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
+                Bitmap bm = (Bitmap) data.getExtras().get("data");
+                simpleDraweeView.setImageURI(data.getData());
+                break;
+            case CUT_NUM:
+                simpleDraweeView.setImageURI(uri);//file:///storage/emulated/0/CaseAndroid/image/08276444-dc23-4cd6-a4b9-8ca11fac38f2.jpg
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
-        NiftyDialogBuilder dialogBuilder= NiftyDialogBuilder.getInstance(this);
         if(keyCode == android.R.id.home){
             if((System.currentTimeMillis()-exitTime) > 2000){
                 Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
