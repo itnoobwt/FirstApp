@@ -102,15 +102,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         simpleDraweeView = (SimpleDraweeView) view.findViewById(R.id.imageView);
         simpleDraweeView.setImageURI(Uri.parse("http://avatar.csdn.net/A/E/5/1_csdnwt.jpg"));
 
-        adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this);
+        adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this,tablayout);
         viewPage.setAdapter(adapter);
+        viewPage.setOffscreenPageLimit(3);
         tablayout.setupWithViewPager(viewPage);
-        for (int i = 0; i<list.size(); i++){
-            tablayout.getTabAt(i).setIcon(R.mipmap.aa);
-        }
-        tablayout.getTabAt(0).setIcon(R.mipmap.aa);
-        tablayout.getTabAt(1).setIcon(R.mipmap.bb);
-        tablayout.getTabAt(2).setIcon(R.mipmap.cc);
+//        for (int i = 0; i<list.size(); i++){
+//            tablayout.getTabAt(i).setIcon(R.mipmap.aa);
+//        }
+//        tablayout.getTabAt(0).setIcon(R.mipmap.aa);
+//        tablayout.getTabAt(1).setIcon(R.mipmap.bb);
+//        tablayout.getTabAt(2).setIcon(R.mipmap.cc);
         viewPage.setCurrentItem(0);
     }
 

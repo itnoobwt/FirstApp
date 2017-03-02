@@ -2,10 +2,11 @@ package firstapp.system.com.myapplication.test;
 
 import org.junit.Test;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.*;
+
 /**
  * private final BlockingQueue<Runnable> workQueue;              //任务缓存队列，用来存放等待执行的任务
  private final ReentrantLock mainLock = new ReentrantLock();   //线程池的主要状态锁，对线程池状态（比如线程池大小
@@ -55,9 +56,9 @@ public class ThreadTest
                     int i = 0;
                     i++;
                     System.out.println("第"+i+"次"+Thread.currentThread().getId()+"  ");
+
                 }
             });
-
 
         }
         threadPool.shutdown();

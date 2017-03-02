@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -25,6 +26,8 @@ import firstapp.system.com.refreshlibrary.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by user on 2017/1/20.
@@ -33,7 +36,7 @@ import java.util.List;
 /**
  * 技术列表文章
  */
-public class TechnologyFragment extends BaseFragment implements MainAdapter.OnItemClickLitener
+public class TechnologyFragment extends BaseFragment implements MainAdapter.OnItemClickLitener,SwipeRefreshLayout.OnRefreshListener
 {
     @BindView(R.id.tab_title)
     TabLayout tabTitle;
@@ -42,7 +45,8 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
     private View view;
     public MainAdapter adapter;
     public List<String> list = new ArrayList<String>();
-
+    @BindView(R.id.swipRefresh)
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
@@ -68,6 +72,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         tabTitle.addTab(tabTitle.newTab().setText("Ruby"));
         tabTitle.addTab(tabTitle.newTab().setText("Swift"));
         tabTitle.addTab(tabTitle.newTab().setText("PL/SQL"));
+        swipeRefreshLayout.setOnRefreshListener(this);
         adapter = new MainAdapter(getActivity(), list);
         adapter.setOnItemClickLitener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -111,6 +116,26 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
     @Override
     public void onItemLongClick(View view, int position)
     {
+
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        executorService.execute(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                list.add("Retrofit结合OKHTTP使用");
+                list.add("C++");
+                list.add("PHP");
+                list.add("C语言");
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
     }
 }
