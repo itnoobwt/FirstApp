@@ -5,9 +5,9 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/head_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
-        app:popupTheme="@style/PopupMenu" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/accent_material_dark" />
 </LinearLayout>

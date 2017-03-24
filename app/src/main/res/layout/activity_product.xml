@@ -21,8 +21,15 @@
                 android:id="@+id/btn_get"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:text="Get请求"
+                android:visibility="visible"
+                android:text="retrofit Get请求"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/btn_okget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:text="okhttp Get请求"
                 android:textAllCaps="false" />
             <TextView
                 android:id="@+id/text_content"

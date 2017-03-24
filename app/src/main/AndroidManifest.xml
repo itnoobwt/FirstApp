@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="firstapp.system.com.myapplication">
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 指纹 -->
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -28,7 +32,34 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".DemoActivity" />
         <activity android:name=".ProductActivity" />
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity" />
+
+        <service
+            android:name=".service.DownloadServeice"
+            android:process=":remote" />
+
+        <activity android:name=".ThreadPoolActivity" />
+        <activity
+            android:name=".FormActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true">
+
+            <!-- <layout -->
+            <!-- android:defaultHeight="500dp" -->
+            <!-- android:defaultWidth="600dp" -->
+            <!-- android:gravity="top|end" -->
+            <!-- android:minimalHeight="450dp" -->
+            <!-- android:minimalWidth="300dp" /> -->
+        </activity>
+        <activity android:name=".AudioManagerActivity" />
+        <activity android:name=".PreferenceActivity" />
+        <activity android:name=".FingerprintActivity" />
+        <activity android:name=".BroadCastActivity"></activity>
+        <receiver android:name=".receive.MyReceive1">
+            <intent-filter>
+                <action android:name="myreceive"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

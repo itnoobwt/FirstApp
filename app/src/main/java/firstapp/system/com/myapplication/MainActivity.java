@@ -1,9 +1,9 @@
 package firstapp.system.com.myapplication;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +11,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -198,6 +200,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     public void requestPermission()
     {
         super.requestPermission();
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.CAMERA)){
+                Toast.makeText(this, "您拒绝了调用相机权限", Toast.LENGTH_SHORT).show();
+            }else{
+                ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},1);
+            }
+        }
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
@@ -231,6 +241,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                             .setButton2Click(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+
                                     dialogBuilder.dismiss();
                                 }
                             })
@@ -253,7 +264,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 break;
             case PHOTO_NUM:
 //                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(uri));
-                Bitmap bm = (Bitmap) data.getExtras().get("data");
+//                Bitmap bm = (Bitmap) data.getExtras().get("data");
                 simpleDraweeView.setImageURI(data.getData());
                 break;
             case CUT_NUM:

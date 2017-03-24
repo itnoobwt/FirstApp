@@ -17,8 +17,7 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import firstapp.system.com.myapplication.BaseFragment;
-import firstapp.system.com.myapplication.ProductActivity;
+import firstapp.system.com.myapplication.*;
 import firstapp.system.com.myapplication.R;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
@@ -64,6 +63,11 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         list.add("C++");
         list.add("PHP");
         list.add("C语言");
+        list.add("Android 7.0多窗体");
+        list.add("AudioManager简介");
+        list.add("Preference示例");
+        list.add("指纹");
+        list.add("广播");
         tabTitle.addTab(tabTitle.newTab().setText("Java"));
         tabTitle.addTab(tabTitle.newTab().setText("Android"));
         tabTitle.addTab(tabTitle.newTab().setText("PHP"));
@@ -110,6 +114,16 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         if (list.get(position).equals("Retrofit结合OKHTTP使用"))
         {
             startActivity(new Intent(getActivity(), ProductActivity.class));
+        }else if(list.get(position).equals("Android 7.0多窗体")){
+            startActivity(new Intent(getActivity(), FormActivity.class));
+        }else if(list.get(position).equals("AudioManager简介")){
+            startActivity(new Intent(getActivity(), AudioManagerActivity.class));
+        }else if(list.get(position).equals("Preference示例")){
+            startActivity(new Intent(getActivity(), PreferenceActivity.class));
+        }else if(list.get(position).equals("指纹")){
+            startActivity(new Intent(getActivity(), FingerprintActivity.class));
+        }else if(list.get(position).equals("广播")){
+            startActivity(new Intent(getActivity(), BroadCastActivity.class));
         }
     }
 

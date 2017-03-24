@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import butterknife.ButterKnife;
@@ -34,11 +38,42 @@ public class BaseActivity extends AppCompatActivity
     public static final int CAMERA_NUM = 2;  //相机
     public static final int PHOTO_NUM = 3;  //相册
     public static final int CUT_NUM = 4;
+    public Toolbar mActionBarToolbar;
+    private String title;
     @Override
     public void setContentView(@LayoutRes int layoutResID)
     {
         super.setContentView(layoutResID);
+        getActionBarToolbar();
         unbinder = ButterKnife.bind(this);
+    }
+
+    protected void setTitle(String title){
+        this.title = title;
+    }
+
+    protected Toolbar getActionBarToolbar() {
+        if (mActionBarToolbar == null) {
+            mActionBarToolbar = (Toolbar) findViewById(R.id.head_toolbar);
+            if (mActionBarToolbar != null) {
+                if(title!=null&&!title.isEmpty()){
+                    mActionBarToolbar.setNavigationIcon(R.mipmap.home_up_btn);
+                    mActionBarToolbar.setTitle(title);
+                }
+                setSupportActionBar(mActionBarToolbar);
+            }
+        }
+        return mActionBarToolbar;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        if(item.getItemId() == android.R.id.home){
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

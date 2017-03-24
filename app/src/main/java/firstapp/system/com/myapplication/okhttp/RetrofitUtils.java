@@ -15,7 +15,7 @@ public class RetrofitUtils
     private Retrofit retrofit;
     public RetrofitUtils(){
         retrofit = new Retrofit.Builder()
-                    .baseUrl("https://192.168.1.137:8443/MyHttps/")
+                    .baseUrl("http://192.168.1.142:8080/HttpTest/")
                 .addConverterFactory(FastJsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(OKhttpClientManager.getInstance().getOkHttpClient())

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import firstapp.system.com.myapplication.activity.BaseActivity;
+import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
 import firstapp.system.com.myapplication.service.ProductServiceImp;
 import firstapp.system.com.myapplication.utils.LogUtils;
 import rx.Observable;
@@ -55,53 +56,27 @@ public class ProductActivity extends BaseActivity implements SwipeRefreshLayout.
     public void getNetWork()
     {
         ProductServiceImp.getProduct(textContent);
+    }
 
-        final String[] names = new String[]{"Hi","Hello","ok"};
-        Subscriber<Integer> subscriber = new Subscriber<Integer>()
+    @OnClick(R.id.btn_okget)
+    public void getOKHTTP(){
+        new Thread(new Runnable()
         {
             @Override
-            public void onCompleted()
+            public void run()
             {
-                //结束
-                LogUtils.e(TAG,"onCompleted");
-            }
-
-            @Override
-            public void onError(Throwable e)
-            {
-                //报错
-                LogUtils.e(TAG,"onError");
-            }
-
-            @Override
-            public void onNext(Integer s)
-            {
-                //开始
-                LogUtils.e(TAG,"onNext  "+s+" "+Thread.currentThread().getId());
-            }
-        };
-//        Observable.from(names).subscribeOn(Schedulers.io())
-//                .map(new Func1<String, Integer>()
-//                {
-//                    @Override
-//                    public Integer call(String s)
-//                    {
-//                        return 0;
-//                    }
-//                })
-//                .subscribe(subscriber);
-
-        Observable.from(names).subscribeOn(Schedulers.io()).observeOn(Schedulers.immediate())
-                .flatMap(new Func1<String, Observable<Integer>>()
+                final String txt = OKhttpClientManager.getInstance().OKhttpRequest("http://192.168.1" +
+                        ".142:8080/HttpTest/ProductServlet");
+                textContent.post(new Runnable()
                 {
                     @Override
-                    public Observable<Integer> call(String s)
+                    public void run()
                     {
-                        Integer[] number = new Integer[]{1,2,3};
-                        return Observable.from(number);
+                        textContent.setText(txt);
                     }
-                }).subscribe(subscriber);
-
+                });
+            }
+        }).start();
     }
 
     @Override
