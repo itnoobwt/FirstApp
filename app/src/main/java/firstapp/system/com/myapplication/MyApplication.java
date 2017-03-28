@@ -7,6 +7,7 @@ import com.gitonway.lee.niftymodaldialogeffects.lib.NiftyDialogBuilder;
 import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
 import firstapp.system.com.myapplication.utils.DialogUtils;
 import firstapp.system.com.myapplication.utils.NetWorkUtis;
+import firstapp.system.com.myapplication.utils.PreferencesUtils;
 
 import java.io.IOException;
 
@@ -23,6 +24,7 @@ public class MyApplication extends Application
         super.onCreate();
         Fresco.initialize(this);
         DialogUtils.init(this);
+        PreferencesUtils.init(this);
         netWorkUtis = NetWorkUtis.init(getApplicationContext());
         try
         {
@@ -33,4 +35,5 @@ public class MyApplication extends Application
             e.printStackTrace();
         }
     }
+
 }

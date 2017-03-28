@@ -68,6 +68,9 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         list.add("Preference示例");
         list.add("指纹");
         list.add("广播");
+        list.add("Service使用");
+        list.add("Vibrator使用");
+        list.add("视频压缩FFmpeg");
         tabTitle.addTab(tabTitle.newTab().setText("Java"));
         tabTitle.addTab(tabTitle.newTab().setText("Android"));
         tabTitle.addTab(tabTitle.newTab().setText("PHP"));
@@ -124,6 +127,12 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
             startActivity(new Intent(getActivity(), FingerprintActivity.class));
         }else if(list.get(position).equals("广播")){
             startActivity(new Intent(getActivity(), BroadCastActivity.class));
+        }else if(list.get(position).equals("Service使用")){
+            startActivity(new Intent(getActivity(), ServiceActivity.class));
+        }else if(list.get(position).equals("Vibrator使用")){
+            startActivity(new Intent(getActivity(), VibratorActivity.class));
+        }else if(list.get(position).equals("视频压缩FFmpeg")){
+            startActivity(new Intent(getActivity(), VideoActivity.class));
         }
     }
 
