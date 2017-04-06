@@ -83,7 +83,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         adapter = new MainAdapter(getActivity(), list);
         adapter.setOnItemClickLitener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(OrientationHelper.VERTICAL);
+        layoutManager.setOrientation(OrientationHelper.HORIZONTAL);
         rv.setLayoutManager(layoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.addItemDecoration(new DividerGridItemDecoration(getActivity(), OrientationHelper.VERTICAL));

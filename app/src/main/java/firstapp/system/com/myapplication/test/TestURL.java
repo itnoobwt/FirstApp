@@ -1,8 +1,10 @@
 package firstapp.system.com.myapplication.test;
 
 import android.preference.PreferenceManager;
+import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
@@ -67,6 +69,21 @@ public class TestURL
             e.printStackTrace();
         }
         catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void test1(){
+
+        String str = "http://localhost:8080/Upload/vieo/1.mov";
+
+        DownUtil downUtil = new DownUtil(str,"F://1.mov",2);
+        try
+        {
+            downUtil.download();
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }

@@ -14,6 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import firstapp.system.com.myapplication.activity.BaseActivity;
+import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
+import firstapp.system.com.myapplication.test.DownUtil;
 import firstapp.system.com.myapplication.utils.*;
 
 import java.io.File;
@@ -31,6 +33,8 @@ public class VideoActivity extends BaseActivity
     Button btnVideoCompress;
     @BindView(R.id.btn_video_luzhi)
     Button btnVideoLuzhi;
+    @BindView(R.id.btn_video_down)
+    Button btnVideodown;
     @BindView(R.id.pb)
     ProgressBar pb;
     private String cmd;
@@ -56,7 +60,41 @@ public class VideoActivity extends BaseActivity
         });
         file = FileUtils.getInstance().getVideDir();
     }
+    @OnClick(R.id.btn_video_down)
+    public void downVideo()
+    {
 
+//       final File file = FileUtils.getInstance().getVideDir();
+//        new Thread(new Runnable()
+//        {
+//            @Override
+//            public void run()
+//            {
+//                try
+//                {
+//                    File f = new File(file,"1.mov");
+//                    DownUtil downUtil = new DownUtil("http://192.168.1.142:8080/Upload/vieo/1.mov",
+//                            f.toString(),2);
+//                    downUtil.download();
+//                }
+//                catch (Exception e)
+//                {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                OKhttpClientManager.getInstance().OKhttpRequestUpload("http://localhost:8080/Upload/UploadFile",
+                        file_path);
+            }
+        }).start();
+
+
+    }
 
     @OnClick(R.id.btn_video_luzhi)
     public void recordingVideo()

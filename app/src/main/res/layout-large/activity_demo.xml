@@ -7,8 +7,13 @@
     android:orientation="horizontal"
     tools:context="firstapp.system.com.myapplication.DemoActivity">
     <fragment
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
         android:name="firstapp.system.com.myapplication.fragment.TechnologyFragment"></fragment>
-
+    <fragment
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:name="firstapp.system.com.myapplication.fragment.NewsFragment"></fragment>
 </LinearLayout>

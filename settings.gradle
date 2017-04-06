@@ -1,1 +1,1 @@
-include ':app', ':library', ':Sign', ':refreshlibrary'
+include ':app', ':library', ':Sign', ':refreshlibrary', ':FragmentApp'
