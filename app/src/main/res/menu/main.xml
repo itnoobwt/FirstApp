@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="300"
         android:title="@string/action_settings"
-        app:showAsAction="never" />
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_fx"
+        android:orderInCategory="300"
+        android:title="分享"
+        app:showAsAction="collapseActionView" />
 </menu>

@@ -1,13 +1,17 @@
 package firstapp.system.com.myapplication.okhttp;
 
+import android.text.TextUtils;
+import firstapp.system.com.myapplication.MyApplication;
 import firstapp.system.com.myapplication.utils.FileUtils;
 import firstapp.system.com.myapplication.utils.LogUtils;
+import firstapp.system.com.myapplication.utils.NetWorkUtis;
 import okhttp3.*;
 
 import javax.net.ssl.*;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.KeyStore;
@@ -15,6 +19,9 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -50,12 +57,33 @@ public class OKhttpClientManager
         @Override
         public Response intercept(Chain chain) throws IOException
         {
-            Response response = chain.proceed(chain.request());
-            response.newBuilder().header("Cache-Control",String.format("max-age=%d",10000)).build();
+            Request request = chain.request();
+            boolean connected = MyApplication.netWorkUtis.isConnected();
+            if(!connected){
+                request = request.newBuilder().cacheControl(CacheControl.FORCE_CACHE).build();
+            }
+            Response response = chain.proceed(request);
             return response;
         }
     };
 
+
+    public CookieJar cookieJar = new CookieJar()
+    {
+        private final HashMap<String, List<Cookie>> cookieStore = new HashMap<>();
+        @Override
+        public void saveFromResponse(HttpUrl url, List<Cookie> cookies)
+        {
+            cookieStore.put(url.host(),cookies);
+        }
+
+        @Override
+        public List<Cookie> loadForRequest(HttpUrl url)
+        {
+            List<Cookie> cookies = cookieStore.get(url.host());
+            return cookies == null? new ArrayList<Cookie>():cookies;
+        }
+    };
     /**
      * 设置网络请求参数
      */
@@ -78,15 +106,16 @@ public class OKhttpClientManager
                 .readTimeout(20,TimeUnit.SECONDS)
                 .writeTimeout(20,TimeUnit.SECONDS)
                 .addInterceptor(interceptor)
-                .hostnameVerifier(new  HostnameVerifier()
-                {
-                    @Override
-                    public boolean verify(String hostname, SSLSession session)
-                    {
-                        return true;
-                    }
-                })
-                .sslSocketFactory(sslParams.getsSLSocketFactory(),sslParams.getTrustManager())
+                .cookieJar(cookieJar)
+//                .hostnameVerifier(new  HostnameVerifier()
+//                {
+//                    @Override
+//                    public boolean verify(String hostname, SSLSession session)
+//                    {
+//                        return true;
+//                    }
+//                })
+//                .sslSocketFactory(sslParams.getsSLSocketFactory(),sslParams.getTrustManager())
                 .cache(cache)
                 .build();
     }
@@ -169,7 +198,19 @@ public class OKhttpClientManager
 
 
     public String OKhttpRequest(String url){
-        Request request = new Request.Builder().url(url).build();
+        Request request = new Request.Builder()
+                .cacheControl(new CacheControl.Builder().maxAge(6000,TimeUnit.MINUTES).build())
+                .url(url)
+                .addHeader("Content-Type","text/html;charset=utf-8")
+                .header("Authorization","wt")
+                .build();
+        //If-Modified-Since: Tue, 21 Mar 2017 03:44:20 GMT
+        List<Cookie> cookie= okHttpClient.cookieJar().loadForRequest(request.url());
+        if(cookie.isEmpty()){
+            Cookie cookie1 = new Cookie.Builder().domain("domain").name("username").value("123").build();
+            cookie.add(cookie1);
+        }
+        okHttpClient.cookieJar().saveFromResponse(request.url(),cookie);
         Call call = okHttpClient.newCall(request);
         try
         {

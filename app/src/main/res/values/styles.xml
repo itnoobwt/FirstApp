@@ -3,9 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!-- 标题背景 -->
+        <item name="colorPrimary">@color/accent_material_dark</item>
+        <!-- 状态栏背景 -->
+        <item name="colorPrimaryDark">@color/accent_material_dark</item>
+        <!-- 设置菜单在头部之下 -->
+        <item name="overlapAnchor">false</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColorPrimary">@color/secondary_text_default_material_light</item>
+        <item name="android:windowBackground">@color/material_grey_300</item>
+        <!--<item name="colorAccent">@color/accent_material_dark</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,5 +25,28 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
+    <style name="Theme.ToolBar.Base.Title" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <!--<style name="PopupMenu" parent="Theme.AppCompat.Light.NoActionBar" >-->
+        <!--&lt;!&ndash;导航栏底色&ndash;&gt;-->
+        <!--<item name="colorPrimary">@color/accent_material_dark</item>-->
+        <!--&lt;!&ndash;状态栏底色&ndash;&gt;-->
+        <!--<item name="colorPrimaryDark">@color/accent_material_dark</item>-->
+        <!--&lt;!&ndash;导航栏上的标题颜色&ndash;&gt;-->
+        <!--<item name="android:textColorPrimary">@android:color/black</item>-->
+        <!--&lt;!&ndash;Activity窗口的颜色&ndash;&gt;-->
+        <!--<item name="android:windowBackground">@color/material_blue_grey_800</item>-->
+        <!--&lt;!&ndash;按钮选中或者点击获得焦点后的颜色&ndash;&gt;-->
+        <!--<item name="colorAccent">#00ff00</item>-->
+        <!--&lt;!&ndash;和 colorAccent相反，正常状态下按钮的颜色&ndash;&gt;-->
+        <!--<item name="colorControlNormal">#ff0000</item>-->
+        <!--&lt;!&ndash;Button按钮正常状态颜色&ndash;&gt;-->
+        <!--<item name="colorButtonNormal">@color/accent_material_light</item>-->
+        <!--&lt;!&ndash;EditText 输入框中字体的颜色&ndash;&gt;-->
+        <!--<item name="editTextColor">@android:color/white</item>-->
+        <!--<item name="overlapAnchor">false</item>-->
+        <!--<item name="android:textSize">15sp</item>-->
+    <!--</style>-->
 </resources>

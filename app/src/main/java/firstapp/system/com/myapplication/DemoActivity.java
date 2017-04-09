@@ -30,7 +30,7 @@ public class DemoActivity extends BaseFragmentActivity
 
         TechnologyFragment fragment = new TechnologyFragment();
         list.add(fragment);
-        adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this);
+        adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this,tablayout);
         viewPage.setAdapter(adapter);
 //        tablayout.setupWithViewPager(viewPage);
 //        tablayout.addTab(tablayout.newTab().setText("主页"));

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--自定义属性-->
+    <declare-styleable name="DogStyle">
+        <!--属性，风格样式的最小单元；-->
+        <attr name="dogSex">
+            <enum name="girl" value="1"/>
+            <enum name="boy" value="2"/>
+        </attr>
+        <attr name="dogName" format="string">订单</attr>
+        <!--这里我解释下reference的用法。它用在一些可以设置引用值的情况，
+        比如@drawable/myImage、@color/myColor等。当然format也可以进行或运算，
+        一般我们定义color类型的属性时，也一般会把format写成format="reference|color"，
+        这样我们不但可以设置颜色值，如#FFFFFF，还可以使用我们自己定义的狗图片，
+        如@drawable/dog_pic。-->
+        <attr name="dogColor" format="reference|string"/>
+    </declare-styleable>
+
+</resources>

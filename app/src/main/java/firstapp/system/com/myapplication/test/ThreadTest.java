@@ -2,8 +2,6 @@ package firstapp.system.com.myapplication.test;
 
 import org.junit.Test;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -57,9 +55,9 @@ public class ThreadTest
                     int i = 0;
                     i++;
                     System.out.println("第"+i+"次"+Thread.currentThread().getId()+"  ");
+
                 }
             });
-
 
         }
         threadPool.shutdown();

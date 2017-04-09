@@ -14,11 +14,16 @@
         app:tabSelectedTextColor="@color/colorAccent"
         app:tabTextColor="@color/colorBlack"
         android:id="@+id/tab_title"/>
-
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/it_rc"/>
+            android:id="@+id/swipRefresh">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/it_rc"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
 
 
 
