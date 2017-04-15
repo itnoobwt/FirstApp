@@ -6,9 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="firstapp.system.com.myapplication.DemoActivity">
-    <fragment
+    <!--<fragment-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:name="firstapp.system.com.myapplication.fragment.TechnologyFragment"></fragment>-->
+    <AutoCompleteTextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="firstapp.system.com.myapplication.fragment.TechnologyFragment"></fragment>
-
+        android:layout_height="wrap_content"
+        android:id="@+id/act"/>
 </LinearLayout>

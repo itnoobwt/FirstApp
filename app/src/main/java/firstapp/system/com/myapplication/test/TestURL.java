@@ -4,13 +4,11 @@ import android.preference.PreferenceManager;
 import firstapp.system.com.myapplication.okhttp.OKhttpClientManager;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
+import java.io.*;
 import java.net.*;
 import java.security.Permission;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -76,14 +74,42 @@ public class TestURL
     @Test
     public void test1(){
 
-        String str = "http://localhost:8080/Upload/vieo/1.mov";
+//        String str = "http://localhost:8080/Upload/vieo/1.mov";
+//
+//        DownUtil downUtil = new DownUtil(str,"F://1.mov",2);
+//        try
+//        {
+//            downUtil.download();
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
 
-        DownUtil downUtil = new DownUtil(str,"F://1.mov",2);
+//        List<String> list = new ArrayList<>();
+//        for (int i = 0 ; i < 3 ; i++){
+//            list.add(""+i);
+//        }
+//        List<String> list1 = new ArrayList<>();
+//        list1.addAll(list);
+//        list.clear();
+//        System.out.println(list1.size()+"");
+//        List<String> list = new ArrayList<>();
+//        for (int i = 0 ; i < 3 ; i++){
+//            list.add(""+i);
+//        }
+//        List<String> list1 = list;
+//        list.clear();
+//        System.out.println(list1.size()+"");
+        String s = "123";
+        s = "qqq";
+        String a = s;
+        System.out.println(a+"   "+s);
         try
         {
-            downUtil.download();
+            String as = new String(s.getBytes(),"UTF-8");
         }
-        catch (Exception e)
+        catch (UnsupportedEncodingException e)
         {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package firstapp.system.com.myapplication.fragment;
 
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import firstapp.system.com.myapplication.*;
 import firstapp.system.com.myapplication.R;
+import firstapp.system.com.myapplication.activity.LastingActivity;
 import firstapp.system.com.myapplication.adapter.DividerGridItemDecoration;
 import firstapp.system.com.myapplication.adapter.MainAdapter;
 import firstapp.system.com.refreshlibrary.*;
@@ -71,6 +73,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         list.add("Service使用");
         list.add("Vibrator使用");
         list.add("视频压缩FFmpeg");
+        list.add("持久化数据");
         tabTitle.addTab(tabTitle.newTab().setText("Java"));
         tabTitle.addTab(tabTitle.newTab().setText("Android"));
         tabTitle.addTab(tabTitle.newTab().setText("PHP"));
@@ -83,7 +86,7 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
         adapter = new MainAdapter(getActivity(), list);
         adapter.setOnItemClickLitener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(OrientationHelper.HORIZONTAL);
+        layoutManager.setOrientation(OrientationHelper.VERTICAL);
         rv.setLayoutManager(layoutManager);
         rv.setItemAnimator(new DefaultItemAnimator());
         rv.addItemDecoration(new DividerGridItemDecoration(getActivity(), OrientationHelper.VERTICAL));
@@ -133,6 +136,8 @@ public class TechnologyFragment extends BaseFragment implements MainAdapter.OnIt
             startActivity(new Intent(getActivity(), VibratorActivity.class));
         }else if(list.get(position).equals("视频压缩FFmpeg")){
             startActivity(new Intent(getActivity(), VideoActivity.class));
+        }else if(list.get(position).equals("持久化数据")){
+            startActivity(new Intent(getActivity(), LastingActivity.class));
         }
     }
 

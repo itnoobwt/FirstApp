@@ -2,9 +2,11 @@ package firstapp.system.com.myapplication.test;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -172,5 +174,18 @@ public class ThreadTest
         });
         //关闭线程池
         executorService.shutdown();
+    }
+
+    @Test
+    public void test(){
+        try
+        {
+            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Timestamp ts = new Timestamp(1492190301000l);
+            System.out.println(sdf.format(ts));
+        }catch (Exception e){
+            System.out.println(e.getMessage()+" 111");
+        }
+
     }
 }

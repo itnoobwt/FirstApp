@@ -1,9 +1,13 @@
 package firstapp.system.com.myapplication.test;
 
+import org.junit.Test;
+
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by user on 2017/3/29.
@@ -65,6 +69,7 @@ public class DownUtil
             threads[i].start();
         }
     }
+
 
 
 }

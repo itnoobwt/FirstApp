@@ -75,6 +75,7 @@ public class StartActivity extends BaseActivity implements Toolbar.OnMenuItemCli
 //        startActivity(intent);
 
         startActivity(new Intent(StartActivity.this,MainActivity.class));
+//        startActivity(new Intent(StartActivity.this,DemoActivity.class));
     }
 
     ServiceConnection connection = new ServiceConnection()
