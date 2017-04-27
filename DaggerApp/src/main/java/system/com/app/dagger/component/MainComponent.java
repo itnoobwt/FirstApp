@@ -1,9 +1,9 @@
-package system.com.app.presenter;
+package system.com.app.dagger.component;
 
+import android.app.Activity;
 import dagger.Component;
-import system.com.app.MainActivity;
-import system.com.app.model.MainModel;
-import system.com.app.model.PoetryModule;
+import system.com.app.dagger.module.MainModule;
+import system.com.app.view.LoginActivity;
 
 /**
  * Created by user on 2017/4/18.
@@ -11,7 +11,7 @@ import system.com.app.model.PoetryModule;
 
 //用@Component表示这个接口是一个连接器，能用@Component注解的只
 //能是interface或者抽象类
-@Component(modules = {MainModel.class,PoetryModule.class})
+@Component(modules = {MainModule.class})
 public interface MainComponent {
 
     /**
@@ -20,5 +20,5 @@ public interface MainComponent {
      * 这里inject表示注入的意思，这个方法名可以随意更改，但建议就
      * 用inject即可。
      */
-    void inject(MainActivity activity);
+    void inject(LoginActivity activity);
 }

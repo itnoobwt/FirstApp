@@ -30,9 +30,12 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.google.dagger:dagger:2.4'
-    apt 'com.google.dagger:dagger-compiler:2.4'
+    compile 'com.android.support:design:25.+'
+    compile 'com.google.dagger:dagger:2.5'
+    apt 'com.google.dagger:dagger-compiler:2.5'
     //java注解
     compile 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.jakewharton:butterknife:8.4.0'
+    compile 'com.jakewharton:butterknife-compiler:8.4.0'
 }
