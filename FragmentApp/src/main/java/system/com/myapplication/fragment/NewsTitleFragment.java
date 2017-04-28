@@ -26,6 +26,14 @@ public class NewsTitleFragment extends Fragment
 {
     private boolean isTwoPane;
     private NewsAdapter adapter;
+
+    /**
+     * 为碎片创建视图（加载布局）时调用
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -62,28 +70,20 @@ public class NewsTitleFragment extends Fragment
         return stringBuilder.toString();
     }
 
+    /**
+     * 当碎片和活动建立关联的时候调用
+     * @param context
+     */
     @Override
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        if(getActivity().findViewById(R.id.news_content_fragment)!=null){
-            isTwoPane = true;         //双页模式
-        }else{
-            isTwoPane =false;        //单页模式
-        }
     }
 
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
-        if(getActivity().findViewById(R.id.news_content_fragment)!=null){
-            isTwoPane = true;         //双页模式
-        }else{
-            isTwoPane =false;        //单页模式
-        }
-    }
-
+    /**
+     * 确保与碎片相关联的活动一定已经创建完毕的时候调用
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
@@ -96,4 +96,21 @@ public class NewsTitleFragment extends Fragment
         adapter.setTwoPane(isTwoPane);
     }
 
+    /**
+     * 当与碎片关联的视图被移除时调用
+     */
+    @Override
+    public void onDestroyView()
+    {
+        super.onDestroyView();
+    }
+
+    /**
+     * 当碎片和活动解除关联的时候调用
+     */
+    @Override
+    public void onDetach()
+    {
+        super.onDetach();
+    }
 }
