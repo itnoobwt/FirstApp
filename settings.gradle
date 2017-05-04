@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 include ':app', ':library', ':Sign', ':refreshlibrary', ':FragmentApp','StudentApp'
+=======
+include ':app', ':library', ':Sign', ':refreshlibrary', ':FragmentApp', ':DaggerApp'
+>>>>>>> 537876065acbb3a9a970c3fd52ac40a799559848

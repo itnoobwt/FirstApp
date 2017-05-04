@@ -2,10 +2,20 @@ package firstapp.system.com.myapplication.test;
 
 import org.junit.Test;
 
+<<<<<<< HEAD
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+=======
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.*;
+
+>>>>>>> 537876065acbb3a9a970c3fd52ac40a799559848
 /**
  * private final BlockingQueue<Runnable> workQueue;              //任务缓存队列，用来存放等待执行的任务
  private final ReentrantLock mainLock = new ReentrantLock();   //线程池的主要状态锁，对线程池状态（比如线程池大小
@@ -173,4 +183,19 @@ public class ThreadTest
         executorService.shutdown();
     }
 
+<<<<<<< HEAD
+=======
+    @Test
+    public void test(){
+        try
+        {
+            DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Timestamp ts = new Timestamp(1492190301000l);
+            System.out.println(sdf.format(ts));
+        }catch (Exception e){
+            System.out.println(e.getMessage()+" 111");
+        }
+
+    }
+>>>>>>> 537876065acbb3a9a970c3fd52ac40a799559848
 }

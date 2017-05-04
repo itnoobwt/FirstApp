@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DaggerApp/DaggerApp.iml" filepath="$PROJECT_DIR$/DaggerApp/DaggerApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/FragmentApp/FragmentApp.iml" filepath="$PROJECT_DIR$/FragmentApp/FragmentApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Sign/Sign.iml" filepath="$PROJECT_DIR$/Sign/Sign.iml" />
       <module fileurl="file://$PROJECT_DIR$/StudentApp/StudentApp.iml" filepath="$PROJECT_DIR$/StudentApp/StudentApp.iml" />

@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        //activity_main做了适配
         setContentView(R.layout.activity_main);
     }
     public static void actionStart(Context content, String newsTitle, String newsContent){

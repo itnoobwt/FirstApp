@@ -5,8 +5,14 @@ buildscript {
         jcenter()
     }
     dependencies {
+<<<<<<< HEAD
         classpath 'com.android.tools.build:gradle:2.3.0'
 
+=======
+        classpath 'com.android.tools.build:gradle:2.2.0'
+        //添加apt插件 dagger2用到的apt
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+>>>>>>> 537876065acbb3a9a970c3fd52ac40a799559848
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
