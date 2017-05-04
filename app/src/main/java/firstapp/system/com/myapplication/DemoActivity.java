@@ -16,29 +16,12 @@ import java.util.List;
 
 public class DemoActivity extends BaseFragmentActivity
 {
-    @BindView(R.id.content_main_viewpage)
-    ViewPager viewPage;
-    @BindView(R.id.content_main_tablayout)
-    TabLayout tablayout;
-    private ViewPageAdapter adapter;
-    private List<Fragment> list = new ArrayList<Fragment>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-
-        TechnologyFragment fragment = new TechnologyFragment();
-        list.add(fragment);
-        adapter = new ViewPageAdapter(getSupportFragmentManager(),list,this,tablayout);
-        viewPage.setAdapter(adapter);
-//        tablayout.setupWithViewPager(viewPage);
-//        tablayout.addTab(tablayout.newTab().setText("主页"));
-//        TabLayout.Tab tab = tablayout.getTabAt(0);
-//        tab.setIcon(R.mipmap.aa);
-//        tablayout.getTabAt(1).setIcon(R.mipmap.bb);
-//        tablayout.getTabAt(2).setIcon(R.mipmap.cc);
-//        tablayout.getTabAt(3).setIcon(R.mipmap.dd);
     }
 
     @Override

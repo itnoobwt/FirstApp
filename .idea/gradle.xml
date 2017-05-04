@@ -9,7 +9,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FragmentApp" />
             <option value="$PROJECT_DIR$/Sign" />
+            <option value="$PROJECT_DIR$/StudentApp" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/refreshlibrary" />

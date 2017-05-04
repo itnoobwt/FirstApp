@@ -4,11 +4,14 @@
 
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <!-- 指纹 -->
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <!-- 震动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApplication"
@@ -54,12 +57,20 @@
         <activity android:name=".AudioManagerActivity" />
         <activity android:name=".PreferenceActivity" />
         <activity android:name=".FingerprintActivity" />
-        <activity android:name=".BroadCastActivity"></activity>
+        <activity android:name=".BroadCastActivity" />
+
         <receiver android:name=".receive.MyReceive1">
             <intent-filter>
-                <action android:name="myreceive"/>
+                <action android:name="myreceive" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".ServiceActivity" />
+
+        <service android:name=".service.MusicService" />
+
+        <activity android:name=".VibratorActivity" />
+        <activity android:name=".VideoActivity"></activity>
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ public class FileUtils
     private static FileUtils fileUtils;
     private String cache = "cache";
     private String image = "image";
+    private String video = "video";
     private static Context context;
 
     public static void init(Context context1){
@@ -65,6 +66,18 @@ public class FileUtils
      */
     public File getImageDir(){
         File file = new File(mBaseDir,image);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        return file;
+    }
+
+    /**
+     * 视频文件夹
+     * @return
+     */
+    public File getVideDir(){
+        File file = new File(mBaseDir,video);
         if(!file.exists()){
             file.mkdirs();
         }

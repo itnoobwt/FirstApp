@@ -252,8 +252,9 @@ public class OKhttpClientManager
      */
     public String OKhttpRequestUpload(String url, File file){
         RequestBody requestBody = RequestBody.create(MediaType.parse(MEDIA_TYPE_PNG),file);
-        RequestBody body = new MultipartBody.Builder()
-                .addFormDataPart("名称","文件名称",requestBody)
+        RequestBody body = new MultipartBody.Builder("AaB03x")
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("名称",file.getName(),requestBody)
                 .addFormDataPart("key","value")
                 .build();
         Request request = new Request.Builder()
@@ -261,6 +262,15 @@ public class OKhttpClientManager
                 .post(body)
                 .build();
         Call call = okHttpClient.newCall(request);
+        try
+        {
+            Response response = call.execute();
+            return response.body().string();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
         return "";
     }
 

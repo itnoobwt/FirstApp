@@ -1,10 +1,10 @@
 package firstapp.system.com.myapplication;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v7.app.AlertDialog;
+
 import firstapp.system.com.myapplication.activity.BaseActivity;
 
 /**
